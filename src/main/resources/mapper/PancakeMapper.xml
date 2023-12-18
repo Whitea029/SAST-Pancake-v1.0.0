@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whitea.sastpancake.mapper.PancakeMapper">
+    <insert id="save">
+        insert into sast_pancake.pancake (title, create_time, ddl)
+        values (#{title},#{createTime},#{ddl});
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from sast_pancake.pancake
+                 where id = #{pancakeId};
+    </delete>
+
+    <select id="query" resultType="com.whitea.sastpancake.entity.po.Pancake">
+        select *
+        from sast_pancake.pancake;
+    </select>
+
+</mapper>

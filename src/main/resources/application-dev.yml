@@ -1,0 +1,13 @@
+whitea:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: sast_pancake
+    username: root
+    password: whitea20041029&
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 8
