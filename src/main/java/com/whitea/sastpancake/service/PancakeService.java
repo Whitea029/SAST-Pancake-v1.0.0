@@ -23,4 +23,10 @@ public interface PancakeService {
      * @param pancakeId
      */
     void deletePancake(Integer pancakeId);
+
+    /**
+     * 做锅
+     * @param pancakeId
+     */
+    void makePot(Integer pancakeId);
 }

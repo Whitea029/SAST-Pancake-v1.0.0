@@ -51,4 +51,24 @@ public class pancakeServiceImpl implements PancakeService {
     public void deletePancake(Integer pancakeId) {
         pancakeMapper.deleteById(pancakeId);
     }
+
+    /**
+     * 做锅
+     *
+     * @param pancakeId
+     */
+    @Override
+    public void makePot(Integer pancakeId) {
+        Pancake pancake = pancakeMapper.getByPancakeId(pancakeId);
+
+        if (pancake == null) {
+            throw new RuntimeException("不存在该饼");
+        }
+
+        if (pancake.getIsDone() == 1) {
+            throw new RuntimeException("该饼的锅已经做好了");
+        }
+
+        pancakeMapper.updateWithIsDown(pancakeId);
+    }
 }

@@ -4,6 +4,7 @@ import com.whitea.sastpancake.entity.dto.PancakeDTO;
 import com.whitea.sastpancake.entity.po.Pancake;
 import com.whitea.sastpancake.result.Result;
 import com.whitea.sastpancake.service.PancakeService;
+import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,17 @@ public class UserController {
         return Result.success();
     }
 
+    /**
+     * 做锅
+     * @param pancakeId
+     * @return
+     */
+    @PostMapping("/pancake/{pancake_id}")
+    public Result makePot(@PathVariable("pancake_id") Integer pancakeId) {
+        log.info("做锅：{}", pancakeId);
+        pancakeService.makePot(pancakeId);
+        return Result.success();
+    }
 
 
 

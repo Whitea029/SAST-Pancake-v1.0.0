@@ -24,4 +24,17 @@ public interface PancakeMapper {
      * 删除饼
      */
     void deleteById(Integer pancakeId);
+
+
+    /**
+     * 根据id查询饼
+     * @param pancakeId
+     */
+    Pancake getByPancakeId(Integer pancakeId);
+
+    /**
+     * 做锅
+     * @param pancakeId
+     */
+    void updateWithIsDown(Integer pancakeId);
 }
