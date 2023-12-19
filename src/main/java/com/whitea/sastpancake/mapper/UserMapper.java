@@ -7,9 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 
 
+
     /**
-     * PancakeMapper.xml
-     * @param user
+     * 通过username查询
+     * @return
      */
-    void login(User user);
+    User getByUsername(String username);
 }
