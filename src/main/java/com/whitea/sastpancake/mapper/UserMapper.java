@@ -13,4 +13,10 @@ public interface UserMapper {
      * @return
      */
     User getByUsername(String username);
+
+    /**
+     * 根据userId查询
+     * @return
+     */
+    User getByUserId(Long userId);
 }

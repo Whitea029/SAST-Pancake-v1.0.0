@@ -2,9 +2,10 @@ package com.whitea.sastpancake.service.impl;
 
 import com.whitea.sastpancake.entity.dto.UserLoginDTO;
 import com.whitea.sastpancake.entity.po.User;
+import com.whitea.sastpancake.esception.PasswordErrorException;
+import com.whitea.sastpancake.esception.UserNotFoundException;
 import com.whitea.sastpancake.mapper.UserMapper;
 import com.whitea.sastpancake.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
         // 判断用户是否存在
         if (user == null) {
-            throw new RuntimeException("用户不存在");
+            throw new UserNotFoundException("用户不存在");
         }
 
         // 密码对比
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
         password = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!password.equals(user.getPassword())) {
             // 密码错误
-            throw new RuntimeException("密码错误");
+            throw new PasswordErrorException("密码错误");
         }
 
         return user;

@@ -2,17 +2,31 @@ package com.whitea.sastpancake.service.impl;
 
 import com.whitea.sastpancake.entity.dto.PancakeDTO;
 import com.whitea.sastpancake.entity.po.Pancake;
+import com.whitea.sastpancake.entity.po.User;
+import com.whitea.sastpancake.esception.NoPermissionException;
+import com.whitea.sastpancake.esception.PancakeNotFoundException;
+import com.whitea.sastpancake.esception.PancakeStatusException;
 import com.whitea.sastpancake.mapper.PancakeMapper;
+import com.whitea.sastpancake.mapper.UserMapper;
+import com.whitea.sastpancake.properties.JwtProperties;
 import com.whitea.sastpancake.service.PancakeService;
+import com.whitea.sastpancake.utils.JwtUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class pancakeServiceImpl implements PancakeService {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private JwtProperties jwtProperties;
 
     @Autowired
     private PancakeMapper pancakeMapper;
@@ -45,10 +59,17 @@ public class pancakeServiceImpl implements PancakeService {
 
     /**
      * 删除饼
+     *
      * @param pancakeId
+     * @param token
      */
     @Override
-    public void deletePancake(Integer pancakeId) {
+    public void deletePancake(Integer pancakeId, String token) {
+        Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
+        Integer role = Integer.valueOf(claims.get("role").toString());
+        if (role == 0) {
+            throw new NoPermissionException("非管理员，无删除权限");
+        }
         pancakeMapper.deleteById(pancakeId);
     }
 
@@ -62,11 +83,11 @@ public class pancakeServiceImpl implements PancakeService {
         Pancake pancake = pancakeMapper.getByPancakeId(pancakeId);
 
         if (pancake == null) {
-            throw new RuntimeException("不存在该饼");
+            throw new PancakeNotFoundException("没有找到该饼");
         }
 
         if (pancake.getIsDone() == 1) {
-            throw new RuntimeException("该饼的锅已经做好了");
+            throw new PancakeStatusException("该饼的锅已经做好");
         }
 
         pancakeMapper.updateWithIsDown(pancakeId);

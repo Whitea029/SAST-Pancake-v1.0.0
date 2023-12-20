@@ -20,9 +20,11 @@ public interface PancakeService {
 
     /**
      * 删除饼
+     *
      * @param pancakeId
+     * @param token
      */
-    void deletePancake(Integer pancakeId);
+    void deletePancake(Integer pancakeId, String token);
 
     /**
      * 做锅

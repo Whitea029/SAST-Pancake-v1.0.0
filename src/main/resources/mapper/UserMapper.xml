@@ -9,4 +9,10 @@
         where username = #{username};
     </select>
 
+    <select id="getByUserId" resultType="com.whitea.sastpancake.entity.po.User">
+        select *
+        from sast_pancake.user
+        where id = #{userId};
+    </select>
+
 </mapper>
