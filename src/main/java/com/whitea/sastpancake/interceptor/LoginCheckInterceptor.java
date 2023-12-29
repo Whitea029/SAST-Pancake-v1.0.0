@@ -1,6 +1,7 @@
 package com.whitea.sastpancake.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
+import com.whitea.sastpancake.context.BaseContext;
 import com.whitea.sastpancake.properties.JwtProperties;
 import com.whitea.sastpancake.result.Result;
 import com.whitea.sastpancake.utils.JwtUtil;
@@ -45,6 +46,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long userId = Long.valueOf(claims.get("userId").toString());
             log.info("当前员工id：", userId);
+            BaseContext.setCurrentId(userId);
             //3、通过，放行
             return true;
         } catch (Exception ex) {
@@ -52,6 +54,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             response.setStatus(401);
             return false;
         }
+
     }
 }
 

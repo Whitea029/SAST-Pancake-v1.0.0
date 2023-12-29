@@ -65,6 +65,7 @@ public class pancakeServiceImpl implements PancakeService {
      */
     @Override
     public void deletePancake(Integer pancakeId, String token) {
+        // 校验用户身份
         Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
         Integer role = Integer.valueOf(claims.get("role").toString());
         if (role == 0) {

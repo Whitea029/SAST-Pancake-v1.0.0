@@ -1,5 +1,6 @@
 package com.whitea.sastpancake.controller;
 
+import com.whitea.sastpancake.context.BaseContext;
 import com.whitea.sastpancake.entity.dto.PancakeDTO;
 import com.whitea.sastpancake.entity.dto.UserLoginDTO;
 import com.whitea.sastpancake.entity.po.Pancake;
@@ -13,6 +14,7 @@ import com.whitea.sastpancake.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,12 +28,12 @@ public class Controller {
 
     @Autowired
     private PancakeService pancakeService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private JwtProperties jwtProperties;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 用户登录
@@ -52,6 +54,9 @@ public class Controller {
                 jwtProperties.getAdminTtl(),
                 claims
         );
+        //Long userId = BaseContext.getCurrentId();
+        String userId = user.getId().toString();
+        redisTemplate.opsForValue().set(userId,token);
 
         // 构造返回对象
         UserLoginVO userLoginVO = UserLoginVO.builder()
@@ -104,7 +109,12 @@ public class Controller {
      */
     @DeleteMapping("/pancake/{pancake_id}")
     public Result deletePancake(@PathVariable("pancake_id") Integer pancakeId, HttpServletRequest request) {
-        String token = request.getHeader(jwtProperties.getAdminTokenName());
+        // 解决用户校验问题
+        // 方法一：解析http请求头部传递的token
+        //String token = request.getHeader(jwtProperties.getAdminTokenName());
+        // 方法二：使用redis，去redis中用id对应查找
+        String userId = BaseContext.getCurrentId().toString();
+        String token = redisTemplate.opsForValue().get(userId).toString();
         log.info("删除饼:{}", pancakeId);
         pancakeService.deletePancake(pancakeId, token);
         return Result.success();

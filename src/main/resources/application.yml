@@ -8,7 +8,7 @@ spring:
     allow-circular-references: true
   datasource:
     driver-class-name: ${whitea.datasource.driver-class-name}
-    url: jdbc:mysql://${whitea.redis.host}:${whitea.datasource.port}/mybatis
+    url: jdbc:mysql://${whitea.redis.host}:${whitea.datasource.port}/${whitea.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: ${whitea.datasource.username}
     password: ${whitea.datasource.password}
   data:
