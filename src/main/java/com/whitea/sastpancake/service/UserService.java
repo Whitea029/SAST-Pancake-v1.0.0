@@ -1,7 +1,8 @@
 package com.whitea.sastpancake.service;
 
-import com.whitea.sastpancake.entity.dto.UserLoginDTO;
-import com.whitea.sastpancake.entity.po.User;
+
+import com.whitea.dto.UserLoginDTO;
+import com.whitea.entity.User;
 
 public interface UserService {
     /**

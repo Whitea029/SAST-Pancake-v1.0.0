@@ -1,10 +1,11 @@
 package com.whitea.sastpancake.mapper;
 
-import com.whitea.sastpancake.entity.po.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.whitea.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 
 
 

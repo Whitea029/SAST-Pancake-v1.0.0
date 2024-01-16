@@ -1,7 +1,7 @@
 package com.whitea.sastpancake.service.impl;
 
-import com.whitea.sastpancake.entity.dto.UserLoginDTO;
-import com.whitea.sastpancake.entity.po.User;
+import com.whitea.dto.UserLoginDTO;
+import com.whitea.entity.User;
 import com.whitea.sastpancake.esception.PasswordErrorException;
 import com.whitea.sastpancake.esception.UserNotFoundException;
 import com.whitea.sastpancake.mapper.UserMapper;

@@ -18,12 +18,12 @@
                  where id = #{pancakeId};
     </delete>
 
-    <select id="query" resultType="com.whitea.sastpancake.entity.po.Pancake">
+    <select id="query" resultType="com.whitea.entity.Pancake">
         select *
         from sast_pancake.pancake;
     </select>
 
-    <select id="getByPancakeId" resultType="com.whitea.sastpancake.entity.po.Pancake">
+    <select id="getByPancakeId" resultType="com.whitea.entity.Pancake">
         select *
         from sast_pancake.pancake
         where id = #{pancakeId};

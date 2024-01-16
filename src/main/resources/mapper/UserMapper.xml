@@ -3,13 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.whitea.sastpancake.mapper.UserMapper">
 
-    <select id="getByUsername" resultType="com.whitea.sastpancake.entity.po.User">
+    <select id="getByUsername" resultType="com.whitea.entity.User">
         select *
         from sast_pancake.user
-        where username = #{username};
+        where user_name = #{username};
     </select>
 
-    <select id="getByUserId" resultType="com.whitea.sastpancake.entity.po.User">
+    <select id="getByUserId" resultType="com.whitea.entity.User">
         select *
         from sast_pancake.user
         where id = #{userId};

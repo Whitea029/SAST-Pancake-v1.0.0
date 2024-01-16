@@ -1,12 +1,13 @@
 package com.whitea.sastpancake.mapper;
 
-import com.whitea.sastpancake.entity.po.Pancake;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.whitea.entity.Pancake;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface PancakeMapper {
+public interface PancakeMapper extends BaseMapper<Pancake> {
 
     /**
      * 查询所有的饼

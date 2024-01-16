@@ -1,3 +1,4 @@
+/*
 package com.whitea.sastpancake.config;
 
 import com.whitea.sastpancake.interceptor.LoginCheckInterceptor;
@@ -22,3 +23,4 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 }
+*/

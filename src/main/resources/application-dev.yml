@@ -6,6 +6,7 @@ whitea:
     database: sast_pancake
     username: root
     password: whitea20041029&
+    type: com.alibaba.druid.pool.DruidDataSource
   redis:
     host: localhost
     port: 6379

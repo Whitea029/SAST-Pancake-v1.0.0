@@ -1,7 +1,8 @@
 package com.whitea.sastpancake.service;
 
-import com.whitea.sastpancake.entity.dto.PancakeDTO;
-import com.whitea.sastpancake.entity.po.Pancake;
+
+import com.whitea.dto.PancakeDTO;
+import com.whitea.entity.Pancake;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface PancakeService {
      * @param pancakeId
      * @param token
      */
-    void deletePancake(Integer pancakeId, String token);
+    void deletePancake(Integer pancakeId);
 
     /**
      * 做锅

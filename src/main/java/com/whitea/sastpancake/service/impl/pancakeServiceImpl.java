@@ -1,8 +1,6 @@
 package com.whitea.sastpancake.service.impl;
-
-import com.whitea.sastpancake.entity.dto.PancakeDTO;
-import com.whitea.sastpancake.entity.po.Pancake;
-import com.whitea.sastpancake.entity.po.User;
+import com.whitea.dto.PancakeDTO;
+import com.whitea.entity.Pancake;
 import com.whitea.sastpancake.esception.NoPermissionException;
 import com.whitea.sastpancake.esception.PancakeNotFoundException;
 import com.whitea.sastpancake.esception.PancakeStatusException;
@@ -61,16 +59,9 @@ public class pancakeServiceImpl implements PancakeService {
      * 删除饼
      *
      * @param pancakeId
-     * @param token
      */
     @Override
-    public void deletePancake(Integer pancakeId, String token) {
-        // 校验用户身份
-        Map<String, Object> claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
-        Integer role = Integer.valueOf(claims.get("role").toString());
-        if (role == 0) {
-            throw new NoPermissionException("非管理员，无删除权限");
-        }
+    public void deletePancake(Integer pancakeId) {
         pancakeMapper.deleteById(pancakeId);
     }
 
